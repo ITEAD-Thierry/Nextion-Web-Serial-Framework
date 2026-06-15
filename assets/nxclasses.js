@@ -26,7 +26,7 @@ class nxUI {
 			22: 'number', 31: 'com ok', 32: 'command'
 		}
 	}
-	
+
 	static get events() {
 		return { 0: 'release', 1: 'touch' };
 	}
@@ -96,10 +96,12 @@ class nxUI {
 			case 17:
 			case 19:
 			case 20:
-			case 31:
 				logContent = JSON.stringify(dataObj.value, (k, v) => { if (k === 'event') { return nxUI.events[v] } return (v) });
-				logClass = 'sts';
+				logClass = 'evt';
 				break;
+			case 31:
+				logContent = JSON.stringify(dataObj.value);
+				logClass = 'sts';
 			case 32:
 				logContent = dataObj.value;
 				logClass = 'cmd';
