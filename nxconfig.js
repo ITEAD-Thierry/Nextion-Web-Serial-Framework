@@ -8,5 +8,6 @@ const myUI = {
 	"logContainer": document.getElementById("logContainer")
 };
 const myPorts = [
-	{ "usbProductId": 0xea60, "usbVendorId": 0x10c4 } // Nextion Foca Max Adapter
+	{ "usbProductId": 0xea60, "usbVendorId": 0x10c4 }, // Nextion Foca Max Adapter
+	{ "usbProductId": 0x2008, "usbVendorId": 0x0557 }
 ];
