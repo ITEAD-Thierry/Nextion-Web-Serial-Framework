@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
+	<meta name="description" content="Nextion Web Serial Framework">
+	<meta name="author" content="Thierry Frenkel">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="Nextion, HMI, Web Serial">
+	<title>Nextion Web Serial Framework</title>
+	<link rel="stylesheet" href="assets/style.css">
+	<script src="assets/nxclasses.js"></script>
+</head>
+
+<body>
+	<div class="verBand">
+		<h1>Nextion Web Serial Framework</h1>
+		<div class="horBand">
+			<div id="comSelect" class="panel">
+				<h2>Communication Settings</h2>
+				<p>
+					<label for="bausSelector" class="caption">Baud rate:</label>
+					<select id="baudSelector" title="Baud rate selector"></select>&nbsp;
+				</p>
+				<p>
+					<span class="caption">Port:</span>
+					<button id="connectButton" disabled>Unavailable</button>&nbsp;
+					<button id="reconnButton" disabled>Reconnect</button>
+				</p>
+			</div>
+			<div id="comTools" class="panel">
+				<h2>Command Tools</h2>
+				<p>
+					<span class="caption">Command:</span>
+					<input type="text" id="commandLine" placeholder="Enter command..." disabled>&nbsp;
+					<button id="sendButton" disabled>Send</button>
+				</p>
+			</div>
+		</div>
+		<div class="horBand main">
+			<div class="panel">
+				<h2>Nextion Output</h2>
+				<div id="logContainer">
+				</div>
+			</div>
+		</div>
+		<div class="horBand sts">
+			<div class="panel wide">
+				<div id="statusContainer">&nbsp;</div>
+			</div>
+			<div class="panel">
+				<div id="verContainer">v.0.1 (work in progress)</div>
+			</div>
+			<div class="panel">
+				<div id="thfContainer">by NEXTION-Thierry</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<script src="nxconfig.js"></script> <!-- This must remain the last line before </body>-->
+</body>
+
+</html>
