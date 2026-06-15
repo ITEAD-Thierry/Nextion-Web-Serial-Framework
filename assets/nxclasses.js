@@ -69,11 +69,15 @@ class nxUI {
 		return this.autoScroll.checked;
 	}
 
+	get isdebug() {
+		return this.isDebug.checked;
+	}
+
 	clearScr() {
 		this.logContainer.innerText = '';
 	}
 
-	log(dataObj, withBytes = false) {
+	log(dataObj, withBytes = this.isdebug) {
 		let logContent;
 		let logClass;
 		switch (dataObj.type) {

@@ -7,7 +7,8 @@ const myUI = {
 	"statusContainer": document.getElementById("statusContainer"),
 	"logContainer": document.getElementById("logContainer"),
 	"clearButton": document.getElementById("clearButton"),
-	"autoScroll":document.getElementById("autoScroll")
+	"autoScroll":document.getElementById("autoScroll"),
+	"isDebug":document.getElementById("isDebug")
 };
 const myPorts = [
 	{ "usbProductId": 0xea60, "usbVendorId": 0x10c4 }, // Nextion Foca Max Adapter
