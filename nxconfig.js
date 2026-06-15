@@ -5,9 +5,11 @@ const myUI = {
 	"commandLine": document.getElementById("commandLine"),
 	"sendButton": document.getElementById("sendButton"),
 	"statusContainer": document.getElementById("statusContainer"),
-	"logContainer": document.getElementById("logContainer")
+	"logContainer": document.getElementById("logContainer"),
+	"clearButton": document.getElementById("clearButton"),
+	"autoScroll":document.getElementById("autoScroll")
 };
 const myPorts = [
 	{ "usbProductId": 0xea60, "usbVendorId": 0x10c4 }, // Nextion Foca Max Adapter
-	{ "usbProductId": 0x2008, "usbVendorId": 0x0557 }
+	{ "usbProductId": 0x2008, "usbVendorId": 0x0557 }  // another USB to Serial adapter
 ];

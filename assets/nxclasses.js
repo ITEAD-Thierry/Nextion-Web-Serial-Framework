@@ -10,6 +10,7 @@ class nxUI {
 			0x20: 'invalid escape character', 0x23: 'variable name too long', 0x24: 'serial buffer overflow'
 		};
 	}
+
 	static get status() {
 		return {
 			0x00: 'booting...', 0x01: 'instruction success', 0x86: 'auto entered sleep mode',
@@ -17,13 +18,15 @@ class nxUI {
 			0xfd: 'transparent data finished', 0xfe: 'transparent data ready'
 		};
 	}
+
 	static get types() {
 		return {
 			0: 'error', 1: 'error', 2: 'error', 3: 'status', 16: '(raw) data', 17: 'touch event',
 			18: 'current page', 19: 'touch coords (awake)', 20: 'touch coords (sleep)', 21: 'string',
-			22: 'number', 32: 'command'
+			22: 'number', 31: 'com ok', 32: 'command'
 		}
 	}
+	
 	static get events() {
 		return { 0: 'release', 1: 'touch' };
 	}
@@ -34,6 +37,7 @@ class nxUI {
 			const b = (x == baudrate);
 			this.baudSelector.add(new Option(x, x, b, b));
 		}
+		this.addHandler('clearButton', 'click', this.clearScr.bind(this));
 	}
 
 	addHandler(element, action, handler) {
@@ -49,6 +53,7 @@ class nxUI {
 		this.connectButton.innerText = (cVar ? "Connect new" : "Disconnect");
 		this.commandLine.disabled = cVar;
 		this.sendButton.disabled = cVar;
+		this.clearButton.disabled = cVar;
 		if (!cVar) {
 			this.statusContainer.innerText = `Connected to ${comProps.portPretty}`;
 		} else {
@@ -58,6 +63,14 @@ class nxUI {
 
 	get baudset() {
 		return parseInt(this.baudSelector.value)
+	}
+
+	get autoscroll() {
+		return this.autoScroll.checked;
+	}
+
+	clearScr() {
+		this.logContainer.innerText = '';
 	}
 
 	log(dataObj, withBytes = false) {
@@ -83,8 +96,9 @@ class nxUI {
 			case 17:
 			case 19:
 			case 20:
+			case 31:
 				logContent = JSON.stringify(dataObj.value, (k, v) => { if (k === 'event') { return nxUI.events[v] } return (v) });
-				logClass = 'evt';
+				logClass = 'sts';
 				break;
 			case 32:
 				logContent = dataObj.value;
@@ -100,8 +114,9 @@ class nxUI {
 		//console.log(logtext); 
 		const logHtml = `<pre class='${logClass}'>${logText}</pre>`;
 		this.logContainer.innerHTML += logHtml;
-		// Todo: add autoscroll option checkbox to UI
-		this.logContainer.scrollTop = this.logContainer.scrollHeight;
+		if (this.autoscroll) {
+			this.logContainer.scrollTop = this.logContainer.scrollHeight;
+		}
 	}
 }
 
@@ -146,7 +161,7 @@ class nxComm {
 					this.#comProps.baudrate = this.#ui.baudset;
 					await this.#comProps.actport.open({ baudRate: this.#comProps.baudrate });
 					this.#comProps.reader = this.#comProps.actport.readable.getReader();
-					let inBuff = new Uint8Array(16);
+					let inBuff = new Uint8Array(4096);
 					let inOffs = 0;
 					let ff3Detect;
 					let slice;
@@ -246,6 +261,14 @@ class nxData {
 				if (this.#integrityCheck(0)) {
 					this.#dataType = 0; //error
 					this.#content = this.#identByte;
+				}
+				break;
+			case (this.#identByte == 0x63):
+				if (this.#bytes[0] == 0x6F && this.#bytes[1] == 0x6D && this.#bytes[2] == 0x6F && this.#bytes[3] == 0x6b) {
+					this.#dataType = 31; // connection info
+					let txtBuf = this.#byteText;
+					let txtArr = txtBuf.split(',');
+					this.#content = { busAddr: txtArr[1].split('-')[1].toString(16), model: txtArr[2], firmware: 'S' + txtArr[3], cpuID: txtArr[4], serial: txtArr[5], flash: txtArr[6].split('-')[0] };
 				}
 				break;
 			case (this.#identByte == 0x65):
