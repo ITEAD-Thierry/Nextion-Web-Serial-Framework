@@ -16,7 +16,7 @@ This framework is intended to go beyond a simple "uploader" for software and fir
 5. Debugging: Send commands to the Nextion HMI, receive, decode, and display the answer.
 6. Upload compiled .tft files to the Nextion's flash memory.
 7. Allow file transfer from and to the Nextion's SD card or memory
-8. "Trap" and filter the Nextion's data returns and allow additial javascript actions through callback functions, similar to the famous listener list in the Nextion Arduino library.
+8. "Trap" and filter the Nextion's data returns and allow additional javascript actions through callback functions, similar to the famous listener list in the Nextion Arduino library.
 
 ## A word about connectivity
 By default, the web browser's dialog for selecting and opening a Com port lists many virtual and bluetooth ports, especially in Linux and macOS. To prevent confusion at the end user's side, I added a filter list to nxconfig.js to limit the choice to known working USB to TTL serial adapters. Actually, the only "allowed" item in this list is the CP2102 chip based [Nextion Foca Max Adapter](https://itead.cc/product/nextion-foca-max-5v2a-output-usb-to-ttl-serial-converter-board/ref/35/) which cares in addition also about the Nextion HMI's power supply. If you know about other known working (with Nextion) USB to TTL serial adapters, don't hesitate to use the "issues" tab here on GitHub and to communicate me the corresponding VID/PID pair, so that I can add it to the list!
