@@ -36,7 +36,7 @@ class nxUI {
 	}
 
 	static get copyright() {
-		return "by <a href='https://itead.cc/ref/35/'> NEXTION-Thierry</a>";
+		return "by <a href='https://itead.cc/nextion-display/ref/35/'> NEXTION-Thierry</a>";
 	}
 
 	init(baudrate) {
