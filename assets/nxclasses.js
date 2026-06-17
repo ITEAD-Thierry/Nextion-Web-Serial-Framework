@@ -31,6 +31,14 @@ class nxUI {
 		return { 0: 'release', 1: 'touch' };
 	}
 
+	static get version() {
+		return "v.0.2 (work in progress)";
+	}
+
+	static get copyright() {
+		return "by <a href='https://itead.cc/ref/35/'> NEXTION-Thierry</a>";
+	}
+
 	init(baudrate) {
 		const baudList = [2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600];
 		for (const x of baudList) {
@@ -38,6 +46,8 @@ class nxUI {
 			this.baudSelector.add(new Option(x, x, b, b));
 		}
 		this.addHandler('clearButton', 'click', this.clearScr.bind(this));
+		this.verContainer.innerText=this.version;
+		this.thfContainer.innerHTML=this.copyright;
 	}
 
 	addHandler(element, action, handler) {
