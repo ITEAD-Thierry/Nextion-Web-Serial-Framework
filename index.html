@@ -2,19 +2,22 @@
 <html lang="en">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html">
 	<meta name="description" content="Nextion Web Serial Framework">
 	<meta name="author" content="Thierry Frenkel">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="Nextion, HMI, Web Serial">
 	<title>Nextion Web Serial Framework</title>
-	<link rel="stylesheet" href="assets/style.css">
-	<script src="assets/nxclasses.js"></script>
+	<base target="_blank">
+	<link rel="stylesheet" href="assets/nxstyle.css">
+	<script src="assets/nxuiclass.js"></script>
+	<script src="assets/nxdataclass.js"></script>
+	<script src="assets/nxcommclass.js"></script>
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
@@ -24,7 +27,7 @@
 			<div id="comSelect" class="panel">
 				<h2>Communication Settings</h2>
 				<p>
-					<label for="bausSelector" class="caption">Baud rate:</label>
+					<label for="baudSelector" class="caption">Baud rate:</label>
 					<select id="baudSelector" title="Baud rate selector"></select>&nbsp;
 				</p>
 				<p>
@@ -33,11 +36,17 @@
 					<button id="reconnButton" disabled>Reconnect</button>
 				</p>
 			</div>
+			<div id="sysInfo" class="panel">
+				<h2>System Info</h2>
+				<div id="sysContainer"></div>
+			</div>
 			<div id="comTools" class="panel">
 				<h2>Command Tools</h2>
 				<p>
 					<span class="caption">Command:</span>
 					<input type="text" id="commandLine" placeholder="Enter command..." disabled>&nbsp;
+				</p>
+				<p><span class="caption">Execute:</span>
 					<button id="sendButton" disabled>Send</button>
 				</p>
 			</div>
@@ -48,14 +57,15 @@
 				<div id="logContainer"></div>
 				<div id="logTools">
 					<button id="clearButton" disabled>Clear</button>
-					<label for="autoScroll"><input id="autoScroll" type="checkbox" checked>Autoscroll</label> 
-					<label for="isDebug"><input id="isDebug" type="checkbox">Debug</label> 
+					<label for="autoScroll"><input id="autoScroll" type="checkbox" checked>Autoscroll</label>
+					<label for="isDebug"><input id="isDebug" type="checkbox">Debug</label>
 				</div>
 			</div>
 		</div>
 		<div class="horBand sts">
 			<div class="panel wide">
-				<div id="statusContainer">&nbsp;</div>
+				<span id="connIndic"></span>
+				<span id="statusContainer"></span>
 			</div>
 			<div class="panel">
 				<div id="verContainer"></div>

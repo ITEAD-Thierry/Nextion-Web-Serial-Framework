@@ -22,11 +22,19 @@ This framework is intended to go beyond a simple "uploader" for software and fir
 By default, the web browser's dialog for selecting and opening a Com port lists many virtual and bluetooth ports, especially in Linux and macOS. To prevent confusion at the end user's side, I added a filter list to nxconfig.js to limit the choice to known working USB to TTL serial adapters. Actually, the only "allowed" item in this list is the CP2102 chip based [Nextion Foca Max Adapter](https://itead.cc/product/nextion-foca-max-5v2a-output-usb-to-ttl-serial-converter-board/ref/35/) which cares in addition also about the Nextion HMI's power supply. If you know about other known working (with Nextion) USB to TTL serial adapters, don't hesitate to use the "issues" tab here on GitHub and to communicate me the corresponding VID/PID pair, so that I can add it to the list!
 
 ## Work in progress...
-The current version 0.2 manages already the steps 1 and 5 of the above list fully, and 2, 3 and 8 partially. As soon as I'll have added everything for the Nextion's extended address mode, 2, 3 and 8 will be completed and v.0.3 will be published. Afterwards I'll care about the remaining tasks. 
+### version 0.3
+While previous versions were happy to connect to the (virtual over USB) serial port, these did not check if there was really a "living" Nextion HMI connected behind the USB-to-serial adapter. This has now changed. After a successful connection to the port, this version tries to establish a connection to the Nextion and either retrieves and displays the system information in the new field of the UI or it throws an error, suggesting to try a different baudrate. The connection status in the bottom status bar has now multiple faces:
++ red dot = Disconnected
++ yellow dot = Connected to the USB-to Serial adapter (USB\VID=0xnnnn&PID=0xnnnn and baud rate are displayed)
++ green = Connected to the Nextion HMI (Nextion model string and baud rate are displayed)
+Moreover, the code has seen a huge cleanup and the cooperation between the UI and Comm objects is now more structured, logical, and efficient.
+### version 0.2 
+manages already the steps 1 and 5 of the above list fully, and 2, 3 and 8 partially. As soon as I'll have added everything for the Nextion's extended address mode, 2, 3 and 8 will be completed and v.0.3 will be published. Afterwards I'll care about the remaining tasks. 
 
 ## Documentation
 For documentation, explanations, use cases, and examples, please read my corresponding Nextion Sunday Blog posts:
 + [Control your Nextion HMI from (almost) any web browser](https://bit.ly/nexblog260607) from June 07, 2026
++ [The Nextion Web Serial Framework is alive – and online!](https://bit.ly/nexblog260621)
 + *(more to come very soon...)*
 
 ## Last but not least
