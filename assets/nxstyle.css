@@ -25,7 +25,7 @@ h2 {
 
 button,
 select {
-	min-width: 6rem;
+	min-width: 7.5rem;
 }
 
 .panel {
@@ -62,6 +62,25 @@ select {
 	align-content: flex-start;
 }
 
+#sysInfo {
+	display: flex;
+	flex-flow: column;
+}
+
+#sysContainer {
+	min-width: 13rem;
+	min-height: 5.5rem;
+	background-color: white;
+	flex: 1;
+	overflow-y: scroll;
+
+	span.sl {
+		display: inline-block;
+		min-width: 5rem;
+		margin-right: 0.25rem
+	}
+}
+
 .main .panel {
 	height: calc(100% - 0.5rem);
 	display: flex;
@@ -71,10 +90,35 @@ select {
 
 .sts .panel {
 	flex-grow: 0;
+
+	.c0 {
+		background-color: red;
+	}
+
+	.c1 {
+		background-color: yellow;
+	}
+
+	.c2 {
+		background-color: green;
+	}
+
+}
+
+#connIndic {
+	display: inline-block;
+	width: 0.7rem;
+	height: 0.7rem;
+	border-radius: 50%;
+	margin-right: 0.25rem;
 }
 
 .wide {
 	flex: 1 !important;
+}
+
+#commandLine {
+	width: 20rem;
 }
 
 #logContainer {
