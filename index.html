@@ -10,73 +10,61 @@
 	<meta name="keywords" content="Nextion, HMI, Web Serial">
 	<title>Nextion Web Serial Framework</title>
 	<base target="_blank">
-	<link rel="stylesheet" href="assets/nxstyle.css">
+	<link rel="stylesheet" href="assets/nxcorestyle.css">
+	<script src="customize/nxlangclass.js"></script>
 	<script src="assets/nxuiclass.js"></script>
 	<script src="assets/nxdataclass.js"></script>
 	<script src="assets/nxcommclass.js"></script>
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
+	<script src="assets/nxhtmlclass.js"></script>
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicons/-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+	<link rel="manifest" href="/assets/site.webmanifest">
 </head>
+
+<style>
+	/* UI color scheme */
+	:root,
+	pre {
+		--screen-bco: rgb(48,64,72);
+		--screen-pco: white;
+		--pane-bco: rgb(24,48,68);
+		--pane-pco: white;
+		--component-bco: white;
+		--component-pco: dimgray;
+		--link-pco: lightgrey;
+		--logdebug-pco: silver;
+		--logret-pco: blue;
+		--logerr-pco: red;
+		--logevt-pco: green;
+		--logsts-pco: dimgrey;
+		--logcmd-pco: brown;
+	}
+</style>
+
+<script>
+	const portWhiteList = [
+		/*{ usbProductId: 0xea60, usbVendorId: 0x10c4 },*/ // Nextion Foca Max Adapter
+	];
+</script>
 
 <body>
 	<div class="verBand">
 		<h1>Nextion Web Serial Framework</h1>
-		<div class="horBand">
-			<div id="comSelect" class="panel">
-				<h2>Communication Settings</h2>
-				<p>
-					<label for="baudSelector" class="caption">Baud rate:</label>
-					<select id="baudSelector" title="Baud rate selector"></select>&nbsp;
-				</p>
-				<p>
-					<span class="caption">Port:</span>
-					<button id="connectButton" disabled>Unavailable</button>&nbsp;
-					<button id="reconnButton" disabled>Reconnect</button>
-				</p>
-			</div>
-			<div id="sysInfo" class="panel">
-				<h2>System Info</h2>
-				<div id="sysContainer"></div>
-			</div>
-			<div id="comTools" class="panel">
-				<h2>Command Tools</h2>
-				<p>
-					<span class="caption">Command:</span>
-					<input type="text" id="commandLine" placeholder="Enter command..." disabled>&nbsp;
-				</p>
-				<p><span class="caption">Execute:</span>
-					<button id="sendButton" disabled>Send</button>
-				</p>
-			</div>
+		<div class="horBand top">
+			<div id="comPane" class="panel"></div> <!--this is mandatory ! All other panes are optional to taste-->
+			<div id="sysPane" class="panel"></div>
+			<div id="cmdPane" class="panel"></div>
 		</div>
 		<div class="horBand main">
-			<div class="panel">
-				<h2>Nextion Output</h2>
-				<div id="logContainer"></div>
-				<div id="logTools">
-					<button id="clearButton" disabled>Clear</button>
-					<label for="autoScroll"><input id="autoScroll" type="checkbox" checked>Autoscroll</label>
-					<label for="isDebug"><input id="isDebug" type="checkbox">Debug</label>
-				</div>
-			</div>
+			<div id="logPane" class="panel"></div>
 		</div>
-		<div class="horBand sts">
-			<div class="panel wide">
-				<span id="connIndic"></span>
-				<span id="statusContainer"></span>
-			</div>
-			<div class="panel">
-				<div id="verContainer"></div>
-			</div>
-			<div class="panel">
-				<div id="thfContainer"></div>
-			</div>
+		<div class="horBand bottom">
+			<div id="conPane" class="panel"></div>
+			<div id="verPane" class="panel"></div>
+			<div id="autPane" class="panel"></div>
 		</div>
 	</div>
-	</div>
-	<script src="nxconfig.js"></script> <!-- This must remain the last line before </body>-->
 </body>
 
 </html>
