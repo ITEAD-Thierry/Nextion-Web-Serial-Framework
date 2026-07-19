@@ -40,7 +40,7 @@ class nxData {
 				if (this.#bytes[0] == 0x6F && this.#bytes[1] == 0x6D && this.#bytes[2] == 0x6F && this.#bytes[3] == 0x6b) {
 					this.#dataType = 31; // connection info
 					let txtArr = this.#byteText.split(',');
-					this.#content = { busAddr: txtArr[1].split('-')[1].toString(16), model: txtArr[2], firmware: 'S' + txtArr[3], cpuID: txtArr[4], serial: txtArr[5], flash: (txtArr[6] >> 20).toString(10) + ' MB' };
+					this.#content = { _busAddr: txtArr[1].split('-')[1]??0, model: txtArr[2], firmware: 'S' + txtArr[3], cpuID: txtArr[4], serial: txtArr[5], flash: (txtArr[6] >> 20).toString(10) + ' MB' };
 				}
 				break;
 			case (this.#identByte == 0x65):
